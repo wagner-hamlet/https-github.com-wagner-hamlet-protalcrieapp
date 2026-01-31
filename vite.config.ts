@@ -12,9 +12,12 @@ export default defineConfig(({ mode }) => {
       },
       plugins: [
         react(),
+        // ... resto do seu código ...
         VitePWA({
           registerType: 'autoUpdate',
-          includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
+          strategies: 'injectManifest', // Como você já tem um sw.js, usamos isso
+          srcDir: '.', 
+          filename: 'sw.js',
           manifest: {
             name: 'Portal Crie App',
             short_name: 'CrieApp',
@@ -22,14 +25,10 @@ export default defineConfig(({ mode }) => {
             theme_color: '#ffffff',
             icons: [
               {
-                src: 'pwa-192x192.png',
-                sizes: '192x192',
-                type: 'image/png'
-              },
-              {
-                src: 'pwa-512x512.png',
+                src: 'icon.png', // Usando o nome exato do arquivo que você subiu
                 sizes: '512x512',
-                type: 'image/png'
+                type: 'image/png',
+                purpose: 'any maskable'
               }
             ]
           }
