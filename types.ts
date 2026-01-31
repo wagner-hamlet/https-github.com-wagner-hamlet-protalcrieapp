@@ -49,6 +49,7 @@ export interface RegistrationOptions {
   tempos: string[];
   temas: string[];
   preferencias: string[];
+  segmentos: string[]; // Adicionado campo de segmentos
 }
 
 export interface Partner {
