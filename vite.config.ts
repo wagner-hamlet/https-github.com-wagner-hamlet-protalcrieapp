@@ -13,18 +13,18 @@ export default defineConfig(({ mode }) => {
       plugins: [
         react(),
         VitePWA({
-          strategies: 'injectManifest',
-          srcDir: '.',
-          filename: 'sw.js',
           registerType: 'autoUpdate',
-          injectRegister: null, // Importante para não duplicar o registro do Service Worker
+          strategies: 'generateSW', // Mudamos aqui para o Vite criar o SW sozinho
+          workbox: {
+            globPatterns: ['**/*.{js,css,html,ico,png,svg}'] // Arquivos para cache
+          },
           manifest: {
             name: 'Portal Crie App',
             short_name: 'CrieApp',
             description: 'Meu app gerado pelo AI Studio',
-            theme_color: '#0F0F0F', // Combinei com a cor do seu index.html
+            theme_color: '#0F0F0F',
             background_color: '#0F0F0F',
-            display: 'standalone', // Faz abrir como um app, sem barra de navegador
+            display: 'standalone',
             icons: [
               {
                 src: 'icon.png',
