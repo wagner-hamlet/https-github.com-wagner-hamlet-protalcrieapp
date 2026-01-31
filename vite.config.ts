@@ -1,7 +1,7 @@
 import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
-import { VitePWA } from 'vite-plugin-pwa'; // Adicionamos isso
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
@@ -12,20 +12,22 @@ export default defineConfig(({ mode }) => {
       },
       plugins: [
         react(),
-        // ... resto do seu código ...
         VitePWA({
-          registerType: 'autoUpdate',
-          strategies: 'injectManifest', // Como você já tem um sw.js, usamos isso
-          srcDir: '.', 
+          strategies: 'injectManifest',
+          srcDir: '.',
           filename: 'sw.js',
+          registerType: 'autoUpdate',
+          injectRegister: null, // Importante para não duplicar o registro do Service Worker
           manifest: {
             name: 'Portal Crie App',
             short_name: 'CrieApp',
             description: 'Meu app gerado pelo AI Studio',
-            theme_color: '#ffffff',
+            theme_color: '#0F0F0F', // Combinei com a cor do seu index.html
+            background_color: '#0F0F0F',
+            display: 'standalone', // Faz abrir como um app, sem barra de navegador
             icons: [
               {
-                src: 'icon.png', // Usando o nome exato do arquivo que você subiu
+                src: 'icon.png',
                 sizes: '512x512',
                 type: 'image/png',
                 purpose: 'any maskable'
